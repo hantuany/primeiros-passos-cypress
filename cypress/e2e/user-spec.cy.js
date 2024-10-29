@@ -16,6 +16,7 @@ const selectorsList = {
   dateField: "[placeholder='yyyy-dd-mm']",
   dateCloseButton: ".--close",
   submitButton: "[type='submit']",
+  textField: ".oxd-select-text--active"
 
 }
 
@@ -34,10 +35,14 @@ const selectorsList = {
     cy.get(selectorsList.genericField).eq(5).clear().type('DriversLicenseTest')
     cy.get(selectorsList.dateField).eq(0).clear().type('2025-03-10')
     cy.get(selectorsList.dateCloseButton).click()
+    cy.get(selectorsList.textField).eq(0).click()
+    cy.contains('Brazilian').click()
+    cy.get(selectorsList.textField).eq(1).click()
+    cy.contains('Married').click()
     cy.get(selectorsList.submitButton).eq(0).click()
     cy.get('body').should('contain', 'Successfully Updated')
     cy.get('.oxd-toast-close')
-  
+    
   })
   it('Login - Fail', () => {
     cy.visit('/auth/login')
